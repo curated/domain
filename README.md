@@ -1,1 +1,1 @@
-# Curated domain
+# Domain
