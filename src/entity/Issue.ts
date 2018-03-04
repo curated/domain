@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  Index,
+} from 'typeorm'
 import { Actor } from './Actor'
 import { Repository } from './Repository'
 
@@ -7,6 +13,7 @@ export class Issue {
   @PrimaryGeneratedColumn({})
   id: number
 
+  @Index({})
   @Column({ type: 'varchar', length: 1000, unique: true })
   githubId: string
 

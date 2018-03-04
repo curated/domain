@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  Index,
 } from 'typeorm'
 import { Actor } from './Actor'
 import { Issue } from './Issue'
@@ -13,6 +14,7 @@ export class Repository {
   @PrimaryGeneratedColumn({})
   id: number
 
+  @Index({})
   @Column({ type: 'varchar', length: 100 })
   githubId: string
 
