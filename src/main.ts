@@ -3,7 +3,6 @@ import { createConnection, Connection } from 'typeorm'
 
 const isTestEnv = Object.is('test', process.env.NODE_ENV)
 const database = isTestEnv ? 'curated_test' : 'curated'
-const synchronize = isTestEnv
 const logging = !isTestEnv
 
 const connectionPromise = createConnection({
@@ -12,15 +11,18 @@ const connectionPromise = createConnection({
   port: 5432,
   username: 'postgres',
   database,
-  synchronize,
   logging,
-  entities: ['dist/entity/**/*.js'],
-  migrations: ['dist/migration/**/*.js'],
-  subscribers: ['dist/subscriber/**/*.js'],
+  synchronize: true,
+  entities: [`${__dirname}/entity/**/*.js`],
+  migrations: [`${__dirname}/migration/**/*.js`],
+  subscribers: [`${__dirname}/subscriber/**/*.js`],
 })
 
 export const getConnection = (): Promise<Connection> => {
   return connectionPromise
 }
 
+export { Actor } from './entity/Actor'
+export { Issue } from './entity/Issue'
+export { Repository } from './entity/Repository'
 export { mergeIssue } from './persistence'

@@ -5,12 +5,7 @@ import { mergeIssue } from './persistence'
 import { Actor } from './entity/Actor'
 import { Issue } from './entity/Issue'
 import { Repository } from './entity/Repository'
-import {
-  Actor as ActorSchema,
-  Issue as IssueSchema,
-  ReactionGroups as ReactionGroupsSchema,
-  Repository as RepositorySchema,
-} from 'curated-octograph'
+import { ActorSchema, IssueSchema, RepositorySchema } from 'curated-octograph'
 import {
   newIssueSchema,
   updatedIssueSchemaV1,

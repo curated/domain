@@ -2,12 +2,7 @@ import { getManager, EntityManager } from 'typeorm'
 import { Actor } from './entity/Actor'
 import { Issue } from './entity/Issue'
 import { Repository } from './entity/Repository'
-import {
-  Actor as ActorSchema,
-  Issue as IssueSchema,
-  ReactionGroups as ReactionGroupsSchema,
-  Repository as RepositorySchema,
-} from 'curated-octograph'
+import { ActorSchema, IssueSchema, RepositorySchema } from 'curated-octograph'
 
 export const mergeIssue = async (schema: IssueSchema): Promise<Issue> => {
   return getManager().transaction(async em => {
