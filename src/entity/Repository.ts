@@ -18,19 +18,19 @@ export class Repository {
   @Column({ type: 'varchar', length: 100 })
   githubId: string
 
-  @Column({ type: 'varchar', length: 1000 })
+  @Column({ nullable: true, type: 'varchar', length: 1000 })
   url: string
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ nullable: true, type: 'varchar', length: 100 })
   name: string
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ nullable: true, type: 'varchar', length: 100 })
   primaryLanguage: string
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', default: 0 })
   forks: number
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', default: 0 })
   stargazers: number
 
   @ManyToOne(type => Actor, owner => owner.repositories, {
