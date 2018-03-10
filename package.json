@@ -16,7 +16,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "lint": "tslint src/**/*.ts",
-    "test": "tsc && ava -v"
+    "test": "tsc && ava -s -v"
   },
   "ava": {
     "require": [

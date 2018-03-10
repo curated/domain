@@ -12,15 +12,25 @@ import {
   updatedIssueSchemaV2,
 } from './persistence.test.fixture'
 
-test.before(async () => {
-  await getConnection()
+test.beforeEach(async () => {
+  await (await getConnection()).synchronize(true)
 })
 
 test('create issue with id only', async t => {
   const em = getManager()
   const mergedIssue = await mergeIssue({ githubId: 'blank' })
   const reloadedIssue = await em.findOne(Issue, { githubId: 'blank' })
-  t.deepEqual(mergedIssue, reloadedIssue)
+  t.deepEqual(
+    reloadedIssue,
+    Object.assign(mergedIssue, {
+      confused: 0,
+      heart: 0,
+      hooray: 0,
+      laugh: 0,
+      thumbsDown: 0,
+      thumbsUp: 0,
+    }),
+  )
   t.true(mergedIssue.id > 0)
   t.is(reloadedIssue.githubId, 'blank')
 })
@@ -99,7 +109,7 @@ test('create nested repository owner within issue', async t => {
   )
 })
 
-test.serial('update issue by github id', async t => {
+test('update issue by github id', async t => {
   const em = getManager()
   await mergeIssue(updatedIssueSchemaV1)
   const mergedIssue = await mergeIssue(updatedIssueSchemaV2)
@@ -125,7 +135,7 @@ test.serial('update issue by github id', async t => {
   t.deepEqual(reloadedIssue.updatedAt, new Date('2017-12-03T10:31:08.000Z'))
 })
 
-test.serial('update nested author within issue', async t => {
+test('update nested author within issue', async t => {
   const em = getManager()
   await mergeIssue(updatedIssueSchemaV1)
   const mergedIssue = await mergeIssue(updatedIssueSchemaV2)
@@ -144,7 +154,7 @@ test.serial('update nested author within issue', async t => {
   t.is(reloadedAuthor.login, 'renamed-inspectocat')
 })
 
-test.serial('update nested repository within issue', async t => {
+test('update nested repository within issue', async t => {
   const em = getManager()
   await mergeIssue(updatedIssueSchemaV1)
   const mergedIssue = await mergeIssue(updatedIssueSchemaV2)
@@ -162,7 +172,7 @@ test.serial('update nested repository within issue', async t => {
   t.is(reloadedRepository.name, 'renamed-octograph')
 })
 
-test.serial('update nested repository owner within issue', async t => {
+test('update nested repository owner within issue', async t => {
   const em = getManager()
   await mergeIssue(updatedIssueSchemaV1)
   const mergedIssue = await mergeIssue(updatedIssueSchemaV2)
