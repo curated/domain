@@ -18,8 +18,14 @@
     "lint": "tslint src/**/*.ts",
     "test": "tsc && ava -v"
   },
+  "ava": {
+    "require": [
+      "dotenv/config"
+    ]
+  },
   "dependencies": {
     "curated-octograph": "file:../octograph",
+    "dotenv": "^5.0.0",
     "pg": "^7.4.1",
     "reflect-metadata": "^0.1.12",
     "typeorm": "^0.1.12"

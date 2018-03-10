@@ -1,18 +1,15 @@
 import 'reflect-metadata'
 import { createConnection, Connection } from 'typeorm'
 
-const isTestEnv = Object.is('test', process.env.NODE_ENV)
-const database = isTestEnv ? 'curated_test' : 'curated'
-const logging = !isTestEnv
-
 const connectionPromise = createConnection({
   type: 'postgres',
-  host: 'localhost',
   port: 5432,
-  username: 'postgres',
-  database,
-  logging,
-  synchronize: true,
+  host: process.env.PG_HOST,
+  username: process.env.PG_HOST,
+  password: process.env.PG_PASSWORD,
+  database: process.env.PG_DATABASE,
+  logging: !Object.is('test', process.env.NODE_ENV),
+  synchronize: !Object.is('production', process.env.NODE_ENV),
   entities: [`${__dirname}/entity/**/*.js`],
   migrations: [`${__dirname}/migration/**/*.js`],
   subscribers: [`${__dirname}/subscriber/**/*.js`],
