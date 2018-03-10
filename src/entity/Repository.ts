@@ -1,10 +1,10 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
+  Entity,
+  Index,
   ManyToOne,
   OneToMany,
-  Index,
+  PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Actor } from './Actor'
 import { Issue } from './Issue'
@@ -12,33 +12,33 @@ import { Issue } from './Issue'
 @Entity()
 export class Repository {
   @PrimaryGeneratedColumn({})
-  id: number
+  public id: number
 
   @Index({})
   @Column({ type: 'varchar', unique: true, length: 50 })
-  githubId: string
+  public githubId: string
 
   @Column({ type: 'text', nullable: true })
-  url: string
+  public url: string
 
   @Column({ type: 'text', nullable: true })
-  name: string
+  public name: string
 
   @Column({ type: 'varchar', nullable: true, length: 50 })
-  primaryLanguage: string
+  public primaryLanguage: string
 
   @Column({ type: 'int', default: 0 })
-  forks: number
+  public forks: number
 
   @Column({ type: 'int', default: 0 })
-  stargazers: number
+  public stargazers: number
 
   @Index({})
   @ManyToOne(type => Actor, owner => owner.repositories, {
     nullable: true,
   })
-  owner: Actor
+  public owner: Actor
 
   @OneToMany(type => Issue, issue => issue.author)
-  issues: Issue[]
+  public issues: Issue[]
 }

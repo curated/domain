@@ -1,9 +1,9 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  OneToMany,
+  Entity,
   Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Issue } from './Issue'
 import { Repository } from './Repository'
@@ -11,24 +11,24 @@ import { Repository } from './Repository'
 @Entity()
 export class Actor {
   @PrimaryGeneratedColumn({})
-  id: number
+  public id: number
 
   @Index({})
   @Column({ type: 'varchar', unique: true, length: 50 })
-  githubId: string
+  public githubId: string
 
   @Column({ type: 'text', nullable: true })
-  url: string
+  public url: string
 
   @Column({ type: 'text', nullable: true })
-  login: string
+  public login: string
 
   @Column({ type: 'text', nullable: true })
-  avatarUrl: string
+  public avatarUrl: string
 
   @OneToMany(type => Repository, repository => repository.owner)
-  repositories: Repository[]
+  public repositories: Repository[]
 
   @OneToMany(type => Issue, issue => issue.author)
-  issues: Issue[]
+  public issues: Issue[]
 }

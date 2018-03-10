@@ -1,9 +1,9 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
+  Entity,
   Index,
+  ManyToOne,
+  PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Actor } from './Actor'
 import { Repository } from './Repository'
@@ -11,60 +11,60 @@ import { Repository } from './Repository'
 @Entity()
 export class Issue {
   @PrimaryGeneratedColumn({})
-  id: number
+  public id: number
 
   @Index({})
   @Column({ type: 'varchar', unique: true, length: 50 })
-  githubId: string
+  public githubId: string
 
   @Column({ type: 'text', nullable: true })
-  url: string
+  public url: string
 
   @Column({ type: 'int', nullable: true })
-  number: number
+  public number: number
 
   @Column({ type: 'text', nullable: true })
-  title: string
+  public title: string
 
   @Column({ type: 'text', nullable: true })
-  bodyText: string
+  public bodyText: string
 
   @Column({ type: 'varchar', nullable: true, length: 50 })
-  state: string
+  public state: string
 
   @Column({ type: 'timestamp', nullable: true })
-  createdAt: Date
+  public createdAt: Date
 
   @Column({ type: 'timestamp', nullable: true })
-  updatedAt: Date
+  public updatedAt: Date
 
   @Column({ type: 'int', default: 0 })
-  heart: number
+  public heart: number
 
   @Column({ type: 'int', default: 0 })
-  hooray: number
+  public hooray: number
 
   @Column({ type: 'int', default: 0 })
-  thumbsUp: number
+  public thumbsUp: number
 
   @Column({ type: 'int', default: 0 })
-  laugh: number
+  public laugh: number
 
   @Column({ type: 'int', default: 0 })
-  confused: number
+  public confused: number
 
   @Column({ type: 'int', default: 0 })
-  thumbsDown: number
+  public thumbsDown: number
 
   @Index({})
   @ManyToOne(type => Actor, author => author.issues, {
     nullable: true,
   })
-  author: Actor
+  public author: Actor
 
   @Index({})
   @ManyToOne(type => Repository, repository => repository.issues, {
     nullable: true,
   })
-  repository: Repository
+  public repository: Repository
 }
