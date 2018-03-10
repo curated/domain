@@ -14,28 +14,28 @@ export class Issue {
   id: number
 
   @Index({})
-  @Column({ type: 'varchar', length: 1000, unique: true })
+  @Column({ type: 'varchar', unique: true, length: 50 })
   githubId: string
 
-  @Column({ nullable: true, type: 'varchar', length: 1000 })
+  @Column({ type: 'text', nullable: true })
   url: string
 
-  @Column({ nullable: true, type: 'int' })
+  @Column({ type: 'int', nullable: true })
   number: number
 
-  @Column({ nullable: true, type: 'varchar', length: 1000 })
+  @Column({ type: 'text', nullable: true })
   title: string
 
-  @Column({ nullable: true, type: 'text' })
+  @Column({ type: 'text', nullable: true })
   bodyText: string
 
-  @Column({ nullable: true, type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', nullable: true, length: 50 })
   state: string
 
-  @Column({ nullable: true, type: 'timestamp' })
+  @Column({ type: 'timestamp', nullable: true })
   createdAt: Date
 
-  @Column({ nullable: true, type: 'timestamp' })
+  @Column({ type: 'timestamp', nullable: true })
   updatedAt: Date
 
   @Column({ type: 'int', default: 0 })

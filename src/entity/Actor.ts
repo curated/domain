@@ -14,16 +14,16 @@ export class Actor {
   id: number
 
   @Index({})
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', unique: true, length: 50 })
   githubId: string
 
-  @Column({ nullable: true, type: 'varchar', length: 1000 })
+  @Column({ type: 'text', nullable: true })
   url: string
 
-  @Column({ nullable: true, type: 'varchar', length: 100 })
+  @Column({ type: 'text', nullable: true })
   login: string
 
-  @Column({ nullable: true, type: 'varchar', length: 1000 })
+  @Column({ type: 'text', nullable: true })
   avatarUrl: string
 
   @OneToMany(type => Repository, repository => repository.owner)

@@ -15,16 +15,16 @@ export class Repository {
   id: number
 
   @Index({})
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', unique: true, length: 50 })
   githubId: string
 
-  @Column({ nullable: true, type: 'varchar', length: 1000 })
+  @Column({ type: 'text', nullable: true })
   url: string
 
-  @Column({ nullable: true, type: 'varchar', length: 100 })
+  @Column({ type: 'text', nullable: true })
   name: string
 
-  @Column({ nullable: true, type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', nullable: true, length: 50 })
   primaryLanguage: string
 
   @Column({ type: 'int', default: 0 })
