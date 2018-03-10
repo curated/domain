@@ -56,17 +56,15 @@ export class Issue {
   @Column({ type: 'int', default: 0 })
   thumbsDown: number
 
+  @Index({})
   @ManyToOne(type => Actor, author => author.issues, {
     nullable: true,
-    cascadeInsert: true,
-    cascadeUpdate: true, // TODO: test
   })
   author: Actor
 
+  @Index({})
   @ManyToOne(type => Repository, repository => repository.issues, {
     nullable: true,
-    cascadeInsert: true,
-    cascadeUpdate: true, // TODO: test
   })
   repository: Repository
 }

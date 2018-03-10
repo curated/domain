@@ -33,9 +33,9 @@ export class Repository {
   @Column({ type: 'int', default: 0 })
   stargazers: number
 
+  @Index({})
   @ManyToOne(type => Actor, owner => owner.repositories, {
-    cascadeInsert: true,
-    cascadeUpdate: true, // TODO: test
+    nullable: true,
   })
   owner: Actor
 
