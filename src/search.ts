@@ -4,7 +4,7 @@ import { Issue } from './entity/Issue'
 const defaultResultSize = 10
 const maxResultSize = 50
 
-const forceParams = {
+const forcedParams = {
   relations: ['author', 'repository', 'repository.owner'],
   cache: true,
 }
@@ -22,20 +22,23 @@ export interface Result {
 }
 
 export const findIssues = async (params: Params = {}): Promise<Result> => {
+  const validatedParams = Object.assign({}, params)
   if (params.take > maxResultSize) {
-    params.take = maxResultSize
+    validatedParams.take = maxResultSize
   }
-
   if (!params.take || params.take < 0) {
-    params.take = defaultResultSize
+    validatedParams.take = defaultResultSize
   }
 
-  return getManager().transaction(async em => {
-    const [issues, count] = await em.findAndCount(
-      Issue,
-      Object.assign(params, forceParams),
-    )
-
-    return { issues, count }
+  return new Promise<Result>(async (resolve, reject) => {
+    try {
+      const [issues, count] = await getManager().findAndCount(
+        Issue,
+        Object.assign(validatedParams, forcedParams),
+      )
+      resolve({ issues, count })
+    } catch (e) {
+      reject(e)
+    }
   })
 }
