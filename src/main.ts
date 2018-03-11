@@ -22,4 +22,6 @@ export const getConnection = (): Promise<Connection> => {
 export { Actor } from './entity/Actor'
 export { Issue } from './entity/Issue'
 export { Repository } from './entity/Repository'
+
 export { mergeIssue } from './persistence'
+export { findIssues } from './search'
